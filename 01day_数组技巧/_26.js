@@ -17,6 +17,7 @@
 输出：5, nums = [0,1,2,3,4]
 |--------------------------------------------------
 */
+//!请你 原地 删除重复出现的元素，
 var removeDuplicates = function (nums) {
   if (nums.length == 0) return 0;
 
@@ -29,6 +30,7 @@ var removeDuplicates = function (nums) {
     }
     fast++;
   }
+  console.log('nums', nums);
   return slow + 1;
 };
 

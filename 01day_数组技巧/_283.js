@@ -18,6 +18,7 @@ var moveZeroes = function (nums) {
     }
   }
 
+  // 倒序
   for (let i = nums.length - 1; i >= start; i--) {
     nums[i] = 0;
   }
