@@ -29,7 +29,8 @@ var sortString = function (s) {
         rest--;
       }
     }
-
+    console.log('hash', hash);
+    console.log('rest', rest);
     //从右到左 取大值
     for (i = 25; i >= 0; i--) {
       if (hash[i] > 0) {
@@ -38,6 +39,8 @@ var sortString = function (s) {
         rest--;
       }
     }
+    console.log('hash', hash);
+    console.log('rest', rest);
   }
   return res.join('');
 };
