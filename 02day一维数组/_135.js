@@ -17,4 +17,35 @@ n 个孩子站成一排。给你一个整数数组 ratings 表示每个孩子的
      第三个孩子只得到 1 颗糖果，这满足题面中的两个条件。
 |--------------------------------------------------
 */
-var candy = function (ratings) {};
+// 1 先初始化一个数组
+// 2.从左往右遍历 如果发现 右边比左边大就+1
+// 3 从右玩左遍历 发现左边比右边大则该轮循环rihgt++ 并且比较该轮循环与 上一轮loops循环所得结果[i]取最大值计算 sum
+// 4.继续循环
+var candy = function (ratings) {
+  //初始化
+  const n = ratings.length;
+  //先全部填充1个糖果
+  const left2right = new Array(n).fill(1);
+  // 从左往右遍历
+  for (let i = 0; i < n; i++) {
+    // [12, 10, 8];如果右边比前面大 就加一颗糖果
+    if (i !== 0 && ratings[i] > ratings[i - 1]) {
+      left2right[i] = left2right[i - 1] + 1; //
+    }
+  }
+  let sum = (right = 0);
+  //从右往左遍历 看看权重
+  for (let i = n - 1; i >= 0; i--) {
+    if (i != n - 1 && ratings[i] > ratings[i + 1]) {
+      right++;
+    } else {
+      right = 1;
+    }
+    //总糖果数取最大值
+    sum += Math.max(left2right[i], right);
+  }
+
+  return sum;
+};
+
+console.log('candy', candy([1, 0, 2]));
