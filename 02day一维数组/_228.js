@@ -23,6 +23,7 @@ var summaryRanges = function (nums) {
 
   for (let i = 0; i < nums.length; i++) {
     const n = nums[i]; //存一个起始
+    //内循环 判断 当前 i 值 + 1 是否等于 下一个数，如果相等则继续往下判断
     while (i < nums.length && nums[i] + 1 == nums[i + 1]) {
       i++;
     }
