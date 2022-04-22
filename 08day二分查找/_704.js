@@ -98,8 +98,3 @@ const binarySearch = (nums, target) => {
   return -1;
 };
 console.log('binarySearch', binarySearch([-1, 0, 3, 5, 9, 12], 3));
-
-/**
- * sss
- *
- */
