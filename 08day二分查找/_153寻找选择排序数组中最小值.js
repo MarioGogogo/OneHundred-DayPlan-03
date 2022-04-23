@@ -33,4 +33,4 @@ const findMin = (nums) => {
   return Math.min(nums[start], nums[end]);
 };
 
-console.log('findMin', findMin([4, 5, 6, 7, 0, 1, 2]));
+console.log('findMin', findMin([2, 1]));
