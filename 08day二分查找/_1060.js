@@ -31,22 +31,25 @@ const missingElement = (nums, k) => {
   let start = 0;
   let end = nums.length - 1;
 
-  while (start <= end) {
+  while (start + 1 < end) {
     const mid = (end + start) >> 1;
     //缺失值
     const miss = nums[mid] - nums[0] - mid;
     if (miss < k) {
-      start = mid + 1;
-    } else if (miss > k) {
-      end = mid - 1;
+      start = mid;
     } else {
-      return nums[mid] - 1;
+      end = mid;
     }
   }
 
-  return nums[end] + k - (nums[end] - nums[0] - end);
+  return nums[end] - nums[0] - end < k
+    ? nums[end] + k - (nums[end] - nums[0] - end) //缺失值
+    : nums[start] + k - (nums[start] - nums[0] - start); //缺失值
 };
 
 console.log('missingElement', missingElement([4, 7, 9, 10], 1));
 console.log('missingElement', missingElement([4, 7, 9, 10], 3));
 console.log('missingElement', missingElement([1, 2, 4], 3));
+
+// 时间复杂度 LogN
+// 空间复杂度O1

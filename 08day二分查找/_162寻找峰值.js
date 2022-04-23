@@ -14,7 +14,7 @@ A[0] < A[1] && A[n-2] > A[n-1] 大白话就是 二边向上攀升
 |--------------------------------------------------
 */
 
-const lookingForPeak = (nums) => {
+const findPeakElement = (nums) => {
   if (nums == null || nums.length === 0) return -1;
 
   //二分
@@ -22,18 +22,15 @@ const lookingForPeak = (nums) => {
   let end = nums.length - 1;
   // 首先可以肯定 峰值不可能再2端
   while (start + 1 < end) {
-    const mid = Math.floor(start + (end - start) / 2);
+    const mid = (end + start) >> 1;
     // 如果mid左上攀升 那么放弃右边
     if (nums[mid] < nums[mid - 1]) {
       end = mid;
     } else if (nums[mid] > nums[mid - 1]) {
       // 如果mid 攀升 那么放弃左边
       start = mid;
-    } else {
-      return mid;
     }
   }
-
   return nums[start] > nums[end] ? start : end;
 };
 
