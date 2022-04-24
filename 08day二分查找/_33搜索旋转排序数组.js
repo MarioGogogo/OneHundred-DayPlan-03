@@ -15,15 +15,14 @@
  * 2 比如target 与最小值 知道左边 还是右边
  * 3.再用一次二分 找到目标值
  */
-const twoSearch = (nums, target) => {
+const search = (nums, target) => {
   if (nums == null || nums.length == 0) return -1;
 
   //套路二分
   let start = 0;
   let end = nums.length - 1;
-  if (start + 1 < end) {
+  while (start + 1 < end) {
     const mid = Math.floor(start + (end - start) / 2);
-
     //把分解 成 头部 中部 尾部
     if (nums[mid] > nums[end]) {
       //再中段 要再次比较  target再中段
@@ -43,7 +42,6 @@ const twoSearch = (nums, target) => {
       }
     }
   }
-
   if (nums[start] === target) {
     return start;
   }
@@ -53,4 +51,5 @@ const twoSearch = (nums, target) => {
   return -1;
 };
 
-console.log('twoSearch', twoSearch([4, 5, 1, 2, 3], 1));
+console.log('search', search([4, 5, 1, 2, 3], 1)); //2
+console.log('search', search([4, 5, 6, 7, 0, 1, 2], 0)); //4
