@@ -7,9 +7,8 @@
 */
 
 const triangleCount = (s) => {
-  if (s == null || s.length < 3) {
-    return 0;
-  }
+  // 边界条件;
+  if (s == null || s.length < 3) return 0;
   //排序
   s.sort((a, b) => a - b);
   let count = 0;

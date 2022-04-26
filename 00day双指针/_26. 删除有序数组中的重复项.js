@@ -33,3 +33,24 @@ var removeDuplicates = function (nums) {
 
 console.log('removeDuplicates', removeDuplicates([1, 1, 2]));
 console.log('removeDuplicates', removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
+
+/**
+ * 采用模板
+ */
+var removeDuplicates2 = function (nums) {
+  if (nums == null || nums.length == 0) return 0;
+  nums.sort((a, b) => a - b);
+  let i = 0,
+    j = 1;
+  for (i = 0; i < nums.length; i++) {
+    while (j < nums.length && nums[i] === nums[j]) {
+      j++;
+    }
+    // 判断是否越界
+    if (j >= nums.length) break;
+    //但遇到i与j不想等 则 赋值
+    nums[i + 1] = nums[j];
+  }
+  return i + 1;
+};
+console.log('removeDuplicates222', removeDuplicates2([1, 1, 2, 2, 0]));
