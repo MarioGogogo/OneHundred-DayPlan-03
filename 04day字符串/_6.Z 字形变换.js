@@ -29,7 +29,6 @@ P     I
  */
 var convert = (s, numRows) => {
   if (numRows === 1) return s;
-
   const len = Math.min(s.length, numRows);
   const rows = []; //二维数组
   //根据numRows 行数初始化几行
@@ -55,31 +54,36 @@ var convert = (s, numRows) => {
 
 const convert2 = (s, numRows) => {
   const len = s.length;
-  const sb = new Array(numRows).fill([]);
-  console.log('sb', sb);
+  //二维数组
+  const sb = new Array(numRows).fill('');
   let idx = 0;
 
   while (idx < len) {
     // 不可以超过行数 且 idx不可能超过len长度
     for (let i = 0; i < numRows && idx < len; i++) {
       //这里表示每一列列数字
-      sb[i].push(s[idx++]);
+      sb[i] += s[idx++];
+      // sb[0]:[p]
+      // sb[1] : [a]
     }
     for (let i = numRows - 2; i >= 1 && idx < len; i--) {
       // 这里表示计算 Z字形 斜线边的字符串数组
-      sb[i].push(s[idx++]);
+      sb[i] += s[idx++];
       /*
         |   / |
         |  /  |
         | /
       */
     }
-    console.log('sb[0]', sb[0]);
   }
-
+  //sb循环
+  console.log('sb', sb);
   for (let i = 1; i < sb.length; i++) {
-    sb[0].push(sb[i]);
+    // 第0个下标元素带头 合并其他
+    sb[0] += sb[i];
   }
   return sb[0].toString();
 };
+console.log('convert2', convert2('PAYPALISHIRING', 3));
 console.log('convert2', convert2('PAYPALISHIRING', 4));
+// "PAHNAPLSIIGYIR"
