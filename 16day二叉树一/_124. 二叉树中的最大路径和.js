@@ -16,5 +16,30 @@
 
 |--------------------------------------------------
 */
-//
-var maxPathSum = function (root) {};
+/*
+ ! 二刷我懂了... innerMax 是当前node作为root的时候的最大值，
+ ? 也就是说只有在当前节点是root的时候才能够同时选左边和右边；不然的话，作为路径上的一份子，
+ * 只能选择左边或者右边。因为dfs的最顶层是二叉树的root，
+ * 所以其实我们每个节点当root的可能性都考虑到了，所以选择在innermax那边更新。妙妙
+ */
+
+const maxPathSum = (root) => {
+  let maxSum = -Infinity; // 最大路径和
+  const dfs = (node) => {
+    if (!node) return 0;
+    const left = dfs(node.left); // 左子树提供的最大路径和
+    const right = dfs(node.right); // 右子树提供的最大路径和
+
+    const innerMaxSum = left + node.val + right; // 当前子树内部的最大路径和
+    maxSum = Math.max(maxSum, innerMaxSum); // 挑战最大纪录
+
+    const outputMaxSum = node.val + Math.max(0, left, right); // 当前子树对外提供的最大和
+
+    // 如果对外提供的路径和为负，直接返回0。否则正常返回
+    return outputMaxSum < 0 ? 0 : outputMaxSum;
+  };
+
+  dfs(root); // 递归的入口
+
+  return maxSum;
+};
