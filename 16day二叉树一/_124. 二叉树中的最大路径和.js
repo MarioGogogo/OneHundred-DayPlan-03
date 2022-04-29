@@ -23,7 +23,7 @@
  * 所以其实我们每个节点当root的可能性都考虑到了，所以选择在innermax那边更新。妙妙
  */
 
-const maxPathSum = (root) => {
+var maxPathSum = (root) => {
   let maxSum = -Infinity; // 最大路径和
   const dfs = (node) => {
     if (!node) return 0;
