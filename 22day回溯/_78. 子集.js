@@ -9,4 +9,6 @@
 输出：[[],[0]]
 |--------------------------------------------------
 */
-var subsets = function (nums) {};
+let subsets = function (nums) {
+
+};

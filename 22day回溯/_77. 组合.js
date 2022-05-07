@@ -45,6 +45,7 @@ const backtrace = (n, k, startIndex) => {
   //2.确定终止条件
   console.log('object', path, k);
   if (path.length === k) {
+    // 位置1:利用es6的'... 展开运算符'进行浅拷贝
     result.push([...path]);
     return;
   }

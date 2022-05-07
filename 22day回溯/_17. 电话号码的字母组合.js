@@ -9,4 +9,31 @@
 |--------------------------------------------------
 */
 const letterMap = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'];
-var letterCombinations = function (digits) {};
+let result = [];
+let s = [];
+var letterCombinations = function (digits) {
+  if (digits.length == 0) return result;
+  //递归函数
+  backtracking(digits, 0);
+  return result;
+};
+
+const backtracking = (digits, index) => {
+  //终止条件
+  if (index === digits.length) {
+    // [[a,b],[a,c]] -- ["ab",'ac']
+    result.push(s.join(''));
+    return;
+  }
+
+  let digit = +digits[index]; // 下标
+  let letters = letterMap[digit]; //下标对应字符串
+  for (let i = 0; i < letters.length; i++) {
+    s.push(letters[i]);
+    //递归
+    backtracking(digits, index + 1);
+    s.pop(); //回溯
+  }
+};
+
+console.log('letterCombinations', letterCombinations('234'));
