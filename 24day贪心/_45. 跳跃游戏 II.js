@@ -16,15 +16,16 @@
 var jump = function (nums) {
   if (nums.length == 0) return 0;
   let curDistance = 0;
-  let ans = 0;
-  let nextDistance = 0; //下一步跳到最远距离
+  let step = 0;
+  let nextDistance = 0;
 
   for (let i = 0; i < nums.length; i++) {
+    //下一步跳到最远距离
     nextDistance = Math.max(i + nums[i], nextDistance);
     if (i == curDistance) {
       //判断是否已经到达终点
       if (curDistance != nums.length - 1) {
-        ans++; // 还没到终点 就需要再走一步
+        step++; // 再走一步 step
         curDistance = nextDistance;
         if (nextDistance >= nums.length - 1) break;
       } else {
@@ -32,7 +33,7 @@ var jump = function (nums) {
       }
     }
   }
-  return ans;
+  return step;
 };
 
 console.log('jump', jump([2, 3, 0, 1, 4]));
