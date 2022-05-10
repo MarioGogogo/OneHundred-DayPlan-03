@@ -14,7 +14,7 @@
 */
 var canJump = function (nums) {
   if (nums == null || nums.length === 0) return false;
-  let cover = 0;
+  let cover = 0; //初始一个
   for (let i = 0; i <= cover; i++) {
     cover = Math.max(i + nums[i], cover);
     //如果最后的步数 等于 或者超过nums的长度说明已经走出来了
@@ -23,4 +23,4 @@ var canJump = function (nums) {
   return false;
 };
 
-console.log('canJump', canJump([2, 3, 1, 1, 4]));
+console.log('canJump', canJump([3, 2, 1, 0, 4]));
