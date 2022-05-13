@@ -17,25 +17,18 @@
 var merge = function (intervals) {
   let res = [];
   if (intervals == null || intervals.length === 0) return res;
+  //排序
   intervals.sort((a, b) => a[0] - b[0]);
-  let flag = false;
   let len = intervals.length;
 
-  for (let i = 1; i < len; i++) {
-    //初始化
-    let start = intervals[i - 1][0];
-    let end = intervals[i - 1][1];
-
-    while (i < len && intervals[i][0] <= end) {
-      //不断更新右区间
-      end = Math.max(end, intervals[i][1]);
-      if (i === len - 1) flag = true;
-      i++;
+  for (let i = 0; i < len; i++) {
+    //初始化   当一个元素 比 res数组中最后一个元素的 end 值大 说明是一个新区间
+    if (res.length == 0 || intervals[i][0] > res[res.length - 1][1]) {
+      res.push(intervals[i]);
+    } else {
+      //包含的情况下 比较 2个结束点的值哪个大 合并res最后一个元素
+      res[res.length - 1][1] = Math.max(res[res.length - 1][1], intervals[i][1]);
     }
-    res.push([start, end]);
-  }
-  if (flag == false) {
-    res.push([intervals[len - 1][0], intervals[len - 1][1]]);
   }
   return res;
 };
