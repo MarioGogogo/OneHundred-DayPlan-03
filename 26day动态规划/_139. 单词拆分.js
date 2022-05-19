@@ -8,13 +8,34 @@
 输入: s = "leetcode", wordDict = ["leet", "code"]
 输出: true
 解释: 返回 true 因为 "leetcode" 可以由 "leet" 和 "code" 拼接成。
- 输入: s = "applepenapple", wordDict = ["apple", "pen"]
-输出: true
-解释: 返回 true 因为 "applepenapple" 可以由 "apple" "pen" "apple" 拼接成。
-     注意，你可以重复使用字典中的单词。
+
 输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
 输出: false
 |--------------------------------------------------
 */
-// 动态规划版本
-let wordBreak = function (s, wordDict) {};
+var wordBreak = function (s, wordDict) {
+  //字典存入 set
+  let wordSet = new Set(wordDict);
+  let len = s.length;
+  //初始化数组
+  const dp = new Array(len + 1).fill(false);
+  //初始化
+  dp[0] = true;
+
+  for (let i = 1; i <= len; i++) {
+    //从后往前遍历
+    for (let j = i - 1; j >= 0; j--) {
+      if (dp[i] == true) break;
+      if (dp[j] == false) continue;
+      //截取当前字符串
+      const suffix = s.slice(j, i);
+      //状态转移方程
+      if (dp[j] == true && wordSet.has(suffix)) {
+        dp[i] = true;
+        break;
+      }
+    }
+  }
+  // 答案
+  return dp[len];
+};

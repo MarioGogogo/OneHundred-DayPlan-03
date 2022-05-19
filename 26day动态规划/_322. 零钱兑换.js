@@ -15,7 +15,7 @@
 输出：0
 |--------------------------------------------------
 */
-var coinChange = function (coins, amount) {
+let coinChange = function (coins, amount) {
   //开数组
   let f = new Array(amount + 1).fill(Infinity);
   let n = f.length;
@@ -28,7 +28,7 @@ var coinChange = function (coins, amount) {
     // 枚举最后一枚硬币
     for (let j = 0; j < n; j++) {
       //排除正无穷 保证不是负数 i - coins[j] 不能  <0
-      if (i >= coins[j] && f[i - coins[j]] != Infinity) {
+      if (i >= coins[j] && f[i - coins[j]] !== Infinity) {
         //更新f[i]
         f[i] = Math.min(f[i], f[i - coins[j]] + 1);
       }
@@ -39,7 +39,7 @@ var coinChange = function (coins, amount) {
 };
 
 //优化
-const coinChange = (coins, amount) => {
+const coinChange2 = (coins, amount) => {
   if (!amount) return 0;
 
   let dp = new Array(amount + 1).fill(Infinity);
@@ -54,3 +54,5 @@ const coinChange = (coins, amount) => {
 
   return dp[amount] === Infinity ? -1 : dp[amount];
 };
+
+
