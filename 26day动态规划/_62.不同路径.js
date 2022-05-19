@@ -17,15 +17,20 @@ let uniquePaths = function (m, n) {
   //初始化二维数组
   let dp = new Array(m).fill(0).map(() => new Array(n).fill(0));
   console.log('dp', dp);
+
+  //先算第一行
   for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      //初始化状态
-      if (i === 0 || j === 0) {
-        dp[i][j] = 1;
-      } else {
-        // 状态转移方程;
-        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-      }
+    dp[i][0] = 1;
+  }
+  //先算第一列
+  for (let i = 0; i < n; i++) {
+    dp[0][i] = 1;
+  }
+  //遍历其他
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      // 状态转移方程;
+      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
     }
   }
   return dp[m - 1][n - 1];
