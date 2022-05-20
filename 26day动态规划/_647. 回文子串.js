@@ -27,7 +27,7 @@ var countSubstrings = function (s) {
   for (let i = n - 1; i >= 0; i--) {
     for (let j = i; j < n; j++) {
       //判断是否回文
-      if (s[i] === s[j] && (j - i <= 1 || dp[i + 1][j - 1])) {
+      if (s[i] === s[j] && (j - i < 2 || dp[i + 1][j - 1])) {
         result++
         dp[i][j] = true
       }
