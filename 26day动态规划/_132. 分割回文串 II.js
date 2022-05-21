@@ -15,46 +15,40 @@
 */
 
 var minCut = function (s) {
-  let n = s.length;
-  if (n <= 1) {
-    return 0;
-  }
-  // dp[i][j] 表示s[i~j]是否为回文串
-  let dp = new Array(n).fill(0).map(() => new Array(n).fill(false));
-  for (let i = 0; i < n; ++i) {
-    dp[i][i] = true;
-  }
-  console.log('dp', dp);
-  for (let i = n - 2; i >= 0; --i) {
-    for (let j = i + 1; j < n; ++j) {
-      if (s[i] === s[j]) {
-        dp[i][j] = j - i + 1 <= 2 ? true : dp[i + 1][j - 1];
+  const n = s.length
+  const g = new Array(n).fill(0).map((_) => new Array(n).fill(false))
+  // 首先来定义 dp 数组，这里使用最直接的定义方法，一维的 dp 数组，其中 dp[i] 表示子串 [0, i] 范围内的最小分割数
+  const dp = new Array(n).fill(0)
+
+  for (let j = 0; j < n; j++) {
+    for (let i = j; i >= 0; i--) {
+      if (i === j) {
+        g[i][j] = true
+      } else {
+        // 第一种情况：j - i = 1，s[i] === s[j]，两个字母挨着，相等就是回文
+        // 第二种情况：j - i > 1，s[i] === s[j] && g[i+1][j-1]
+        if (s[i] === s[j] && (j - i === 1 || g[i + 1][j - 1])) {
+          g[i][j] = true
+        }
       }
     }
   }
-  // dp1[i]表示字符串s[0~i]的最少分割次数
-  let dp1 = new Array(n).fill(0).map((item, idx) => idx);
-  for (let i = 1; i < n; ++i) {
-    // 如果s[0]到s[i]为回文，那就不需要分割，dp1[i] = 0 次数最少
-    if (dp[0][i]) {
-      dp1[i] = 0;
-      continue;
-    }
-    for (let j = 1; j <= i; ++j) {
-      if (dp[j][i]) {
-        dp1[i] = Math.min(dp1[i], dp1[j - 1] + 1);
+
+  for (let j = 1; j < n; j++) {
+    if (g[0][j]) {
+      // 从首字母到j处都是回文
+      dp[j] = 0
+    } else {
+      dp[j] = j // 最大的分割数
+      for (let i = 0; i <= j; i++) {
+        if (g[i][j]) {
+          dp[j] = Math.min(dp[j], dp[i - 1] + 1)
+        }
       }
     }
   }
-  return dp1[n - 1];
-};
+  // 那么最终要返回的就是 dp[n-1] 了
+  return dp[n - 1]
+}
 
-// const minCut = function (s) {
-//   let n = s.length;
-
-//   const dp = new Array(s);
-
-//   return dp[n - 1];
-// };
-
-console.log('minCut', minCut('aab'));
+console.log('minCut', minCut('aab'))
