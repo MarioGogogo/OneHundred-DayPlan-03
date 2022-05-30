@@ -32,6 +32,7 @@ var climbStairs = function (n) {
   return dp[2]
 }
 
+// 动态规划
 var climbStairs = function (n) {
   // dp[i] 为第 i 阶楼梯有多少种方法爬到楼顶
   // dp[i] = dp[i - 1] + dp[i - 2]

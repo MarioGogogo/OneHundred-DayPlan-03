@@ -45,6 +45,5 @@ var canPartition = function (nums) {
   console.log('dp', dp)
   return dp[n][sum]
 }
-
 console.log('canPartition', canPartition([1, 5, 11, 5]))
 console.log('canPartition', canPartition([1, 2, 3, 5]))
