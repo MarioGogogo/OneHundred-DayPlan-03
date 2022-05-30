@@ -22,19 +22,31 @@ enention -> exention (将 'n' 替换为 'x')
 exention -> exection (将 'n' 替换为 'c')
 exection -> execution (插入 'u')
 |--------------------------------------------------
-*/
+/**
+ *
+ *
+ * @param {*} word1
+ * @param {*} word2
+ * @return {*} 
+ */
 var minDistance = function (word1, word2) {
+  //初始化数组
   const dp = new Array(word1.length + 1)
     .fill(0)
     .map(() => new Array(word2.length + 1).fill(0))
 
+  // i-1 表示word1 和 j-1 字符串 最近距离
   for (let i = 0; i <= word1.length; i++) {
     dp[i][0] = i
   }
   for (let j = 0; j <= word2.length; j++) {
     dp[0][j] = j
   }
-
+  /**1adf
+   * 1. w[i-1] === w2[j-1] 表示字符相同不做任何处理
+   * 2. w[i-1 ] != w2[j-1]  增删改 三操作
+   * 3.w[i-1] === w2[j-1] 可以推导 dp[i][j] = dp[i-1][j-1]
+   */
   for (let i = 1; i <= word1.length; i++) {
     for (let j = 1; j <= word2.length; j++) {
       //递推方程
