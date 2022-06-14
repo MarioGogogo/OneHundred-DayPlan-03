@@ -17,8 +17,8 @@ function allBackPack(weight, value, size) {
   // weight 数组的长度len 就是物品个数
   for (let i = 1; i <= len; i++) {
     // 遍历物品 顺向
-    for (let j = 0; j <= size; j++) {
-      // 遍历背包容量
+    for (let j = 1; j <= size; j++) {
+      // 遍历背包容量 只考虑背包可以放进去
       if (j >= weight[i]) {
         dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i])
       }
