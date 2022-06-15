@@ -10,6 +10,7 @@ deleteAtIndex(index)：如果索引 index 有效，则删除链表中的第 in
 
 |--------------------------------------------------
 */
+// 构造函数
 class LinkNode {
   constructor(val, next) {
     this.val = val
@@ -32,19 +33,12 @@ MyLinkedList.prototype.getNode = function (index) {
   }
   return cur
 }
-/**
- * @param {number} index
- * @return {number}
- */
+
 MyLinkedList.prototype.get = function (index) {
   if (index < 0 || index >= this._size) return -1
   return this.getNode(index).val
 }
-
-/**
- * @param {number} val
- * @return {void}
- */
+// 添加头部
 MyLinkedList.prototype.addAtHead = function (val) {
   const node = new LinkNode(val, this._head)
   this._head = node
@@ -53,11 +47,7 @@ MyLinkedList.prototype.addAtHead = function (val) {
     this._tail = node
   }
 }
-
-/**
- * @param {number} val
- * @return {void}
- */
+// 添加尾部
 MyLinkedList.prototype.addAtTail = function (val) {
   const node = new LinkNode(val, null)
   this._size++
@@ -69,19 +59,47 @@ MyLinkedList.prototype.addAtTail = function (val) {
   this._tail = node
   this._head = node
 }
+// 添加index中
+MyLinkedList.prototype.addAtIndex = function (index, val) {
+  if (index > this._size) return
+  // 插入头部
+  if (index <= 0) {
+    return this.addAtHead(val)
+  }
+  // 插入尾部
+  if (index === this._size) {
+    return this.addAtTail(val)
+  }
 
-/**
- * @param {number} index
- * @param {number} val
- * @return {void}
- */
-MyLinkedList.prototype.addAtIndex = function (index, val) {}
+  // 获取目标节点的上一个的节点
+  const node = this.getNode(index - 1)
+  //重新 拼接
+  node.next = new LinkNode(val, node.next)
+  this._size++
+}
+//删除index中
+MyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (index < 0 || index > this._size) return
+  //如果删除头部
+  if (index === 0) {
+    this._head = this._head.next
+    //如果删除的这个节点同时是尾节点，要处理尾节点
+    if (index === this._size - 1) {
+      this._tail = this._head
+    }
+    this._size--
+    return
+  }
 
-/**
- * @param {number} index
- * @return {void}
- */
-MyLinkedList.prototype.deleteAtIndex = function (index) {}
+  // 获取目标节点的上一个的节点
+  const node = this.getNode(index - 1)
+  node.next = node.next.next
+  // 如果删除的尾部  那么他的上一个节点 就变成了尾部
+  if (index === this._size - 1) {
+    this._tail = node
+  }
+  this._size--
+}
 
 /**
  * Your MyLinkedList object will be instantiated and called as such:
