@@ -13,28 +13,29 @@
 
 var isAnagram = function (s, t) {
   //边界条件
-  if (s.length != t.length) return false;
+  if (s.length != t.length) return false
   //模拟hashmap
-  let map = [];
+  let map = []
   // 先把s字符串中的都存到map中
   for (let a of s) {
-    map[a] = (map[a] || 0) + 1;
+    map[a] = (map[a] || 0) + 1
   }
   //继续遍历t
   for (let a of t) {
     if (map[a]) {
-      map[a]--;
+      z
+      map[a]--
       // 在t中存在字符a多于在s中存在的字符a(本质上也是在s中存在而在t中不存在，因为已判定长度相同)
       if (map[a] < 0) {
-        return false;
+        return false
       }
     } else {
       // 在t字符串中存在而在s字符串中不存在
-      return false;
+      return false
     }
   }
-  return true;
-};
+  return true
+}
 
-console.log('isAnagram', isAnagram('anagram', 'nagaram'));
-console.log('isAnagram', isAnagram('rat', 'car'));
+console.log('isAnagram', isAnagram('anagram', 'nagaram'))
+console.log('isAnagram', isAnagram('rat', 'car'))
