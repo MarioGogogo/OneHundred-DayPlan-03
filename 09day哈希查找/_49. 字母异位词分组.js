@@ -13,7 +13,7 @@
 输出: [["a"]]
 |--------------------------------------------------
 */
-
+// 时间复杂度 nklogk n 是strs 中的字符串的数量，k 是strs 中的字符串的的最大长度
 var groupAnagrams = function (strs) {
   let result = []
   const map = new Map()
