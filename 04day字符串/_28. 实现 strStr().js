@@ -13,21 +13,22 @@
 */
 var strStr = function (haystack, needle) {
   //边界条件
-  if (haystack == null || haystack.length < needle.length) return -1;
-  if (needle == null || needle.length == 0) return 0;
+  if (haystack == null || haystack.length < needle.length) return -1
+  if (needle == null || needle.length == 0) return 0
+
   for (i = 0; i < haystack.length; i++) {
     //needle第一个元素匹配上了 后面needle继续++
     if (haystack[i] === needle[0]) {
-      let len = 0;
+      let len = 0
       while (
         i + len < haystack.length && //小于长度
         len < needle.length && //长度小于needle 从0 开始计数的
         haystack[i + len] === needle[len] //判断i++ 与 needle ++ 后面的值都相等
       ) {
-        len++;
+        len++
       }
-      if (len === needle.length) return i;
+      if (len === needle.length) return i
     }
   }
-  return -1;
-};
+  return -1
+}
