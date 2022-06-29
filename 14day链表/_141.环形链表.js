@@ -3,7 +3,7 @@
 | 判断链表是一个环
 |--------------------------------------------------
 */
-var hasCycle = function (head) {
+let hasCycle = function (head) {
   let slow = head
   let fast = head
   while (fast && fast.next) {
@@ -13,3 +13,5 @@ var hasCycle = function (head) {
   }
   return false
 }
+
+hasCycle()
